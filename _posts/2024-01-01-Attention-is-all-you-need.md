@@ -3,8 +3,8 @@ layout: post
 title: A Paper a Week - Week 1
 subtitle: Attention is all you need, Vaswani et al.
 cover-img: /assets/img/path.jpg
-thumbnail-img: /assets/img/thumb.png
-share-img: /assets/img/path.jpg
+thumbnail-img: /assets/img/attention.jpg
+share-img: /assets/img/apaperaweek.jpg
 tags: [week1, paper]
 ---
 
