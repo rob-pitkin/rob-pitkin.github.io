@@ -5,7 +5,7 @@ subtitle: Neural Machine Translation by Jointly Learning to Align and Translate,
 cover-img: /assets/img/apaperaweek.jpg
 thumbnail-img: /assets/img/NeuralMachineTranslation.jpg
 share-img: /assets/img/apaperaweek.jpg
-tags: [week1, paper]
+tags: [week2, paper]
 ---
 
 ### Introduction
