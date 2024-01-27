@@ -29,7 +29,7 @@ where $y$ is the target label and $x^1,...,x^m$ are the input tokens. This objec
 While the above two objective functions alone would be enough to accomplish the pre-training and fine-tuning framework described, the authors added a third auxiliary objective function which combines the fine-tuning objective with a weighted pre-training objective term in order to improve model generalization and accelerate convergence. This final learning objective is modelled as follows:
 $$L_3(C) = L_2(C) + \lambda * L_1(U)$$
 
-This additional pre-training objective term is essentially a form of regularization on the fine-tuning objective function and the weight parameter, $\lambda$, is a hyperparameter that can be tuned on.
+This additional pre-training objective term is essentially a form of regularization on the fine-tuning objective function and the weight parameter, $\lambda $, is a hyperparameter that can be tuned on.
 
 Overall, the GPT architecture represents an enormous step taken in the usability of LLMs, specifically transformers, due to how much can be learned by the architecture via pre-training. Since large unlabeled datasets are cheap relative to their labeled counterparts, leveraging them to create larger models with better performances that can also generalize to other downstream tasks opened the door to almost every kind of LLM you'd encounter today.
 
