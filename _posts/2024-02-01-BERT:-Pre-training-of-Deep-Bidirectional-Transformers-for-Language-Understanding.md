@@ -25,4 +25,4 @@ BERT as an architecture was revolutionary to the field of NLP due to it's state 
 
 ### Questions/Notes I Have
 1. For a more in-depth explanation of BERT, I'd recommend this Hugging Face [article](https://huggingface.co/blog/bert-101) which has great illustrations of many of the important ideas outlined in the paper.
-2. One of the really cool aspects about BERT compared to the GPT series is that BERT isentirely open source for anyone to use. This is in large part why so many improvements and iterations have been made on top of the BERT architecture and why BERT is so widely used.
+2. One of the really cool aspects about BERT compared to the GPT series is that BERT is entirely open source for anyone to use. This is in large part why so many improvements and iterations have been made on top of the BERT architecture and why BERT is so widely used.
