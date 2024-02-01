@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A Paper a Week - Week 5
-subtitle: BERT\: Pre-training of Deep Bidirectional Transformers for Language Understanding, Devlin et al.
+subtitle: BERT':' Pre-training of Deep Bidirectional Transformers for Language Understanding, Devlin et al.
 cover-img: /assets/img/apaperaweek.jpg
 thumbnail-img: /assets/img/BERT.jpg
 share-img: /assets/img/apaperaweek.jpg
