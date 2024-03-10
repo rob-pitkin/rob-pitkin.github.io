@@ -24,4 +24,4 @@ The second novelty, experience replay, comes into play with regards to actually 
 The results of the paper show that the DQN approach beat state of the art methods across 43 of the 49 atari games and achieved human-level performance on 29 of the 49 games, proving just how effective the DQN algorithm is and how well it can generalize to different problems.
 
 ### Questions/Notes I Have
-1. I'm going to re-post the good visual [article](https://towardsdatascience.com/reinforcement-learning-explained-visually-part-5-deep-q-networks-step-by-step-5a5317197f4b) on Deep Q Networks, which was one of the original uses of deep learning in RL and will set the stage for some papers to come.
+1. I'm going to re-post the good visual [article](https://towardsdatascience.com/reinforcement-learning-explained-visually-part-5-deep-q-networks-step-by-step-5a5317197f4b) on Deep Q Networks since this is the actual paper it refers to
