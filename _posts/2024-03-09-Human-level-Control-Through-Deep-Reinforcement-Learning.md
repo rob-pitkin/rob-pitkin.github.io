@@ -9,7 +9,7 @@ tags: [week10, paper]
 ---
 
 ### Introduction
-For the tenth post in this series I took a step back in the field of RL and decided to start with one of the seminal papers of deep reinforcement learning, "Human-level control through deep reinforcement learning", by Mnih et al. This paper presents the Deep Q-Network architecture/algorithm, which was the first established architecture for applying deep learning to the traditional Q-learning algorithm.
+For the tenth post in this series, I took a step back in the field of RL and decided to start with one of the seminal papers of deep reinforcement learning, "Human-level control through deep reinforcement learning", by Mnih et al. This paper presents the Deep Q-Network architecture/algorithm, which was the first established architecture for applying deep learning to the traditional Q-learning algorithm.
 
 ### Summary
 The primary idea presented in this paper was creating a novel deep learning approach to achieve state of the art performance on 49 Atari games. The approach centered around three significant novelties; the first being the convolutional architecture used for processing game inputs, the second being the dataset randomization done during training coined as "experience replay", and the third being all of the training and network design done to enable efficient and effective learning.
