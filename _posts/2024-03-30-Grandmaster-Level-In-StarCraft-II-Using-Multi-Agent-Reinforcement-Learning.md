@@ -1,0 +1,29 @@
+---
+layout: post
+title: A Paper a Week - Week 13
+subtitle: "Grandmaster level in StarCraft II using multi-agent reinforcement learning, Vinyals et al."
+cover-img: /assets/img/apaperaweek.jpg
+thumbnail-img: /assets/img/AlphaStar.jpg
+share-img: /assets/img/apaperaweek.jpg
+tags: [week13, paper]
+---
+
+### Introduction
+For the thirteenth post in this series, I read "Grandmaster level in StarCraft II using multi-agent reinforcement learning" by Vinyals et al. The paper details the development, training, and experimental results of the AlphaStar StarCraft II agent developed by DeepMind. While there are high-level similarities between AlphaStar and other AI game agents developed by DeepMind such as AlphaGo or AlphaZero, AlphaStar had to take an entirely different approach due to the multi-agent and partially observable nature of StarCraft II. However, through a combination of proven deep learning methods and novel reinforcement learning techniques, AlphaStar was able to reach Grandmaster level with all three races in StarCraft II, placing it above 99.8% of all players.
+
+### Summary
+StarCraft II is a competitive video game where players are given a small base and various units (e.g. builders) on a map with the objective of creating more units and buildings while also performing research tasks so that players can destroy all of another player's buildings. A game is considered "won" when there's only one player with buildings left standing. Typically, StarCraft II is played in a 1v1 format so while there are many different units to control within the game, games themselves don't require or involve any teamwork.
+
+In order to make AlphaStar realistic to a human player, the authors imposed a variety of constraints on the agent so that it being a computer doesn't inherently enable superhuman abilities. For example, the authors restrained the camera view of the agent, the actions taken per minute, as well as established latency for processing observations (i.e. the screen + state) and decision-making. However, unlike other AI StarCraft II agents, AlphaStar didn't simplify the game at all to make the problem easier.
+
+At its core, AlphaStar relies on a combination of imitation learning and reinforcement learning. Similar to the original AlphaGo chess agent, AlphaStar utilizes supervised learning to bootstrap its policy network and then proceeds to learn via self play and reinforcement learning for the remainder of training. This bootstrapping has the effect of establishing basic strategies and guidelines for the agent to follow by using supervised learning to minimize the difference between the policy network's action selection and a human-generated action selection given a dataset of human-played games. This pre-training step has the effect of saving a lot of RL training time since it would take an extremely long time for an RL agent to learn basic gameplay just through exploration (this is a side-effect of the complexity of StarCraft II as a game, most significantly its action space).
+
+The policy network AlphaStar uses is a function $$\pi_{\theta}(a_t|s_tz)$$ that maps all previous observations and actions, $$s_t=o_{1:t-1}a_{1:t-1}$$, and $$z$$, the strategy statistics generated via supervised learning (i.e. human-like bias) to a probability distribution over actions, $$a_t$$, for the current timestep. Unlike AlphaZero, which uses no human influence whatsoever, AlphaStar maintains the strategy statistic throughout training and tries to minimize the distance between its own action selection and human action selection as part of its optimization.
+
+The other novel aspect about AlphaStar is that it uses a league-style of self play. That is, there are three so-called "main agents", one for each of the StarCraft II races, three so-called "main exploiter agents" that are trained how to exploit the weaknesses of the main agents and only play against the main agents, and lastly there are six "league exploiter agents" that play against the entire league and learn systemic weaknesses of the entire league. The main agents then train against the other nine agents with a probability proportional to the opponent win rate the opposing agents have. That is, the more difficult opponents are played against more often so as to maintain challenging matches.
+
+While AlphaStar is extremely impressive and uses a lot of modern ideas in both reinforcement learning and supervised learning, I feel less inclined to appreciate it due to how many different parts go into it. Maybe I'm a purist in that way but an agent like AlphaZero is much more appealing to me due to its "from first-principles" knowledge and self-honed talent through self-play. However, in a game as complex as StarCraft II, implementing such an algorithm wouldn't be effective nor would it come anywhere close to the strength that the "combination" agent does. All told, the best AlphaStar agent produced took 44 days to train on a collection of TPUs, which is significantly faster than the number of hours the best StarCraft II players have to put in to reach similar levels.
+
+### Questions/Notes I Have
+1. Here's a [link](https://www.nature.com/articles/s41586-019-1724-z.epdf?author_access_token=lZH3nqPYtWJXfDA10W0CNNRgN0jAjWel9jnR3ZoTv0PSZcPzJFGNAZhOlk4deBCKzKm70KfinloafEF1bCCXL6IIHHgKaDkaTkBcTEv7aT-wqDoG1VeO9-wO3GEoAMF9bAOt7mJ0RWQnRVMbyfgH9A%3D%3D) to the paper for those who are curious.
+2. And the corresponding DeepMind [article](https://deepmind.google/discover/blog/alphastar-grandmaster-level-in-starcraft-ii-using-multi-agent-reinforcement-learning/) for a more brief and high-level summary.
