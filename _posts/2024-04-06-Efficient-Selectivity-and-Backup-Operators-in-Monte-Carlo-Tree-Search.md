@@ -1,0 +1,27 @@
+---
+layout: post
+title: A Paper a Week - Week 14
+subtitle: "Efficient Selectivity and Backup Operators in Monte-Carlo Tree Search, by Rémi Coulom"
+cover-img: /assets/img/apaperaweek.jpg
+thumbnail-img: /assets/img/MCTS.jpg
+share-img: /assets/img/apaperaweek.jpg
+tags: [week14, paper]
+---
+
+### Introduction
+For the fourteenth post in this series, I read "Efficient Selectivity and Backup Operators in Monte-Carlo Tree Search", by Rémi Coulom. The paper mainly focuses on the fundamentals of the Monte-Carlo Tree Search algorithm and how to implement it in an efficient fashion for a 9x9 Go playing agent.
+
+
+### Summary
+I chose to read this paper because I wanted to gain a deeper understanding of Monte-Carlo Tree Search (MCTS) as an algorithm since it is fundamental to algorithms like AlphaGo and AlphaZero, which I've read previously.
+
+The algorithm itself is based off of two phases, the expansion phase and the evaluation/backup phase. The expansion phase starts with a single-node tree, with the root being the current game state, and iteratively performs simulated sample episodes from the current leaf node (the root for t=0) to a terminal state. As an episode is being simulated, a new node is being stored in the tree for each simulated state and at each node the number of times the state has been visited as well as the sum of its experienced values and squared sum of experienced values is stored. Once a simulation reaches the terminal state of an episode, the algorithm switches over to the evaluation/backup phase where each of the nodes experienced during the episode are updated with the value of that state (the sum of discounted rewards in the simplest case) as well as the number of times that state was visited. After a single iteration is completed and several episodes have been simulated from the current leaf, the best immediate child node, defined by the max reward, is chosen to be the next action taken and that node becomes the new leaf to start from for the next iteration.
+
+MCTS is very similar to generic Monte-Carlo algorithms in the sense that entire trajectories are simulated in order to generate accurate approximations of the current state's value. However, the main way that MCTS differs, and how Coulom's approach differs from other work, is to use a best-first node exploration strategy that leverages a probability distribution proportional to the value of the available nodes to explore when selecting future states in episodic rollouts (expansion). In other words, nodes are chosen at random at the beginning of the expansion phase, but as more and more epsiodes are generated, nodes are assigned a selection probability proportional to the average value of the state in previous episodes (or RMS value of the state) since at each state is stored the number of visits and the sum of the values (and the sum of the squared values). With this strategy, Coulom doesn't completely prune portions of the tree just due to their immediate worse reward and instead just weighs the probability of visiting low-value states worse than the high-value states. This enables the algorithm to still maintain an exploration strategy while being more "focused" on states that are on average more promising from past rollouts.
+
+What's interesting about MCTS is that it can be configured to work even in a resource-constrained environment. It's trivial to see that as the number of rollouts approaches infinity, MCTS simplifies into exhaustive tree search, which is guaranteed to find the best possible move or action at each timestep. However, in the case of games, time tends to be a limited resource and players are often given a limited amount of time to make each move. As a result, only some set number of rollouts can be computed, which is inversely proportional to the depth of the current leaf node. Yet, by weighing selection during rollouts based on the value of the node, the limited number of rollouts are efficiently directed towards actions that return promising values. This strategy is most akin to how an actual human might think through future actions in a game given a limited amount of time. One can't iteratively evaluate every single move during one's turn and then choose the best move based off of that. Instead, humans will use heuristics and estimated game state valuations to initialize episodes and then perform the rollout of the episode using the same strategy. A great example of this is when chess players rattle off possible lines that could be taken from a given game state. Whether conciously or subconciously, players are evaluating the game state at each point in the line and choosing the next best state off of which state they evaluate as most promising. The major difference is that MCTS is using fully generated episodes to determine estimates of the value that approach the true value as the number of episodes approaches infinity and humans are doing function approximation to estimate how good a state is without having to rollout the entire episode and back up the estimated value (in reality it may be a combination of the two, a la AlphaGo/AlphaZero).
+
+
+### Questions/Notes I Have
+1. Here's a link to the [paper](https://www.remi-coulom.fr/CG2006/) for anyone curious about learning more.
+2. I think next week I'll read a paper on UCB, or Upper Confidence Bound, which is a strategy for accurately balancing exploitation and exploration while assigning state values during MCTS.
